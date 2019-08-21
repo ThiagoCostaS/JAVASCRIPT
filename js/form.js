@@ -43,14 +43,14 @@ botaoAdicionar.addEventListener("click", function (event) {
     tabela.appendChild(pacienteTr);
 
     function obtemPacienteDoFormulario(form) {
-
+        let { nome, peso, altura, gordura } = form;
         let paciente = new Paciente(
             nome.value,
             peso.value,
             altura.value,
             gordura.value
         )
-        
+
         return paciente;
 
     }
