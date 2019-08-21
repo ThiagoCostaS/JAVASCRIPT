@@ -9,17 +9,43 @@ botaoAdicionar.addEventListener("click", function (event) {
     //Extraindo informacoes do paciente do form
     const paciente = obtemPacienteDoFormulario(form);
 
-    console.log(paciente);
+    let dadosValidos = validaDadosInformados(paciente, (msgError) => {
+        alert(msgError)
+    })
+    
+    if (dadosValidos) {
+    
+        console.log(paciente);
 
-    //cria a tr e a td do paciente
-    const pacienteTr = criaPacienteParaTabela(paciente)
+        //cria a tr e a td do paciente
+        const pacienteTr = criaPacienteParaTabela(paciente)
 
-    //adicionando o paciente na tabela.
-    enviaPacienteParaTabela(pacienteTr)
+        //adicionando o paciente na tabela.
+        enviaPacienteParaTabela(pacienteTr)
 
-    limpaFormulario(form)
+        limpaFormulario(form)
+    }
 })
 
+function validaDadosInformados(paciente, fallback) {
+
+    let pesoValido = false
+    let alturaValida = false
+
+    if (paciente.peso > 0 || paciente.peso < 1000) {
+        fallback("Peso Inválido")
+        pesoValido = true
+        pacienteNode.classList.add("paciente-invalido");
+    }
+
+    if (paciente.altura <= 0 || paciente.altura >= 3.00) {
+        fallback("Altura Inválida")
+        alturaValida = true
+        pacienteNode.classList.add("paciente-invalido")
+    }
+
+    return pesoValido && alturaValida
+}
 
 function criaPacienteParaTabela(paciente) {
     let pacienteTr = document.createElement("tr");
@@ -48,7 +74,7 @@ function criaPacienteParaTabela(paciente) {
 function obtemPacienteDoFormulario(form) {
 
     let { nome, peso, altura, gordura } = form;
-    
+
     let paciente = new Paciente(
         nome.value,
         peso.value,
@@ -66,7 +92,7 @@ function enviaPacienteParaTabela(pacienteTr) {
 }
 
 function limpaFormulario(form) {
-    
+
     let { nome, peso, altura, gordura } = form;
 
     nome.value = ""
