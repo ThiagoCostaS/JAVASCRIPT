@@ -3,49 +3,42 @@
 var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista";
 
-var pacientes = document.querySelectorAll(".paciente");
+let pacientes = document.querySelectorAll(".paciente");
 
 
 for(i=0; i < pacientes.length; i++){
    
-    var paciente = pacientes[i];
+    let pacienteNode = pacientes[i];
+    let paciente = new Paciente();
 
-    var tdPeso = paciente.querySelector(".info-peso");
-    var peso = tdPeso.textContent ;
+    let tdPeso = pacienteNode.querySelector(".info-peso");
+    paciente.peso = tdPeso.textContent ;
     
-    var tdAltura = paciente.querySelector(".info-altura");
-    var altura = tdAltura.textContent;
+    let tdAltura = pacienteNode.querySelector(".info-altura");
+    paciente.altura = tdAltura.textContent;
     
-    var tdImc = paciente.querySelector(".info-imc");
-    
-    
-    var pesoValido = true;
-    var alturaValida = true;
+    let tdImc = pacienteNode.querySelector(".info-imc");
     
     
-    if (peso <= 0  || peso >= 1000){
+    let pesoValido = true;
+    let alturaValida = true;
+    
+    
+    if (paciente.peso <= 0  || paciente.peso >= 1000){
         alert("Peso Invalido");
         pesoValido = false;
-        paciente.classList.add("paciente-invalido");
+        pacienteNode.classList.add("paciente-invalido");
         }
     
-    if (altura <= 0  || altura >= 3.00){
+    if (paciente.altura <= 0  || paciente.altura >= 3.00){
         alert("Altura Invalida");
         alturaValida = false;
-        paciente.classList.add("paciente-invalido");
+        pacienteNode.classList.add("paciente-invalido");
     
     }
     
     if(alturaValida && pesoValido){
-        var imc = calculaImc(peso,altura);
-        tdImc.textContent = imc; 
-       
-    }
-
-    function calculaImc(peso,altura){
-        var imc = 0;
-        imc = peso / (altura * altura);   
-        return imc.toFixed(2);
+        tdImc.textContent = paciente.imc();  
     }
 
 }
