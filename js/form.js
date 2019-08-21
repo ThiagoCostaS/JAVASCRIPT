@@ -44,13 +44,13 @@ botaoAdicionar.addEventListener("click", function (event) {
 
     function obtemPacienteDoFormulario(form) {
 
-        var paciente = {
-            nome: form.nome.value,
-            peso: form.peso.value,
-            altura: form.altura.value,
-            gordura: form.gordura.value
-
-        }
+        let paciente = new Paciente(
+            nome.value,
+            peso.value,
+            altura.value,
+            gordura.value
+        )
+        
         return paciente;
 
     }
