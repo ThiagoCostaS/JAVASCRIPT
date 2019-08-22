@@ -32,17 +32,17 @@ function validaDadosInformados(paciente, fallback) {
     let pesoValido = false
     let alturaValida = false
 
-    if (paciente.peso > 0 || paciente.peso < 1000) {
-        fallback("Peso Inválido")
-        pesoValido = true
-        pacienteNode.classList.add("paciente-invalido");
-    }
+    if (paciente.peso != "" && paciente.peso > 0 && paciente.peso < 1000) {
 
-    if (paciente.altura <= 0 || paciente.altura >= 3.00) {
-        fallback("Altura Inválida")
+        pesoValido = true
+
+    } else fallback("Peso Inválido")
+
+    if (paciente.altura != "" && paciente.altura > 0 && paciente.altura < 3.00) {
+    
         alturaValida = true
-        pacienteNode.classList.add("paciente-invalido")
-    }
+
+    } else fallback("Altura Inválida")
 
     return pesoValido && alturaValida
 }
