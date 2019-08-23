@@ -93,10 +93,5 @@ function enviaPacienteParaTabela(pacienteTr) {
 
 function limpaFormulario(form) {
 
-    let { nome, peso, altura, gordura } = form;
-
-    nome.value = ""
-    peso.value = ""
-    altura.value = ""
-    gordura.value = ""
+    form.reset();
 }
